@@ -21,10 +21,11 @@ bot.on('ready', () => {
   getDocGoogleSheet().then((doc) => {
     const sheet = doc.sheetsByIndex[0];
     console.log('Connected ⚙️');
-
-    sheet.getRows().then((rows) => {
-      const lastTenRow = rows.slice(-10);
-      main(bot, lastTenRow);
-    });
+    setInterval(() => {
+      sheet.getRows().then((rows) => {
+        const lastTenRow = rows.slice(-10);
+        main(bot, lastTenRow);
+      });
+    }, 3000);
   });
 });

@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 
-export const getChannel = async (bot) => {
+export const getGuild = async (bot) => {
   const guild = bot.guilds.cache.get(process.env.GUILD_ID);
 
   if (!guild) return;
@@ -18,12 +18,15 @@ export const getChannel = async (bot) => {
   };
 };
 
-export const makerEmbed = (data) => {
+export const makerEmbed = (data, bot) => {
   const embed = new MessageEmbed()
-    .setColor('#21ba45')
-
+    .setColor('#00D718')
     .setFooter({
       text: `${data.rowNumber} - ${data.date}`
+    })
+    .setAuthor({
+      name: bot.user.username,
+      iconURL: bot.user.displayAvatarURL()
     })
     .setImage(data.image || '')
     .setFields(
@@ -60,7 +63,7 @@ export const checkDate = (data, roles) => {
   const description = data[head[4]];
   const image = data[head[5]];
   const team = data[head[6]];
-  const isSent = data[head[7]];
+  const msgId = data[head[7]];
 
   const mentionTeam = roles.find((role) => role.name === team);
 
@@ -86,7 +89,7 @@ export const checkDate = (data, roles) => {
     description,
     image,
     team: mentionTeam.id,
-    isSent
+    msgId
   };
 };
 
@@ -98,7 +101,7 @@ export const msgToObj = (msg, roles) => {
   const serviceTo = embed.fields[1].value;
   const studentId = embed.fields[2].value;
   const description = embed.fields[3].value;
-  const image = embed.image.url;
+  const image = embed.image?.url || '';
   const teamId = msg.content.replace(/[^0-9]/g, '');
 
   const team = roles.find((role) => role.id === teamId);

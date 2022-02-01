@@ -1,12 +1,15 @@
-import { getChannel, msgToObj } from '../utils';
+import { getGuild, makerEmbed, msgToObj, checkDate } from '../utils';
 
 export default async function (bot, idMsg, data) {
-  const { channel, roles } = await getChannel(bot);
+  const { channel, roles } = await getGuild(bot);
 
   const lastMsg = await channel.messages
     .fetch(idMsg)
     .then((msg) => msg)
     .catch(() => false);
+
+  const message = checkDate(data, roles);
+  if (!message || !lastMsg) return;
 
   const arrMsg = msgToObj(lastMsg, roles);
   const arrRow = data._rawData;
@@ -18,7 +21,8 @@ export default async function (bot, idMsg, data) {
 
   const isEqual = compareArrays(arrRow, arrMsg);
 
-  if (isEqual) {
-    console.log('nada mudou');
-  }
+  if (isEqual) return;
+
+  const embed = makerEmbed(message, bot);
+  lastMsg.edit(embed);
 }
