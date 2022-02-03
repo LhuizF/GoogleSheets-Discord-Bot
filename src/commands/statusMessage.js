@@ -7,10 +7,6 @@ export default async function (bot) {
   if (!channel) return;
 
   const embed = new MessageEmbed().setColor('#09D319').setTitle('Online  ✅');
-  // .setAuthor({
-  //   name: bot.user.username,
-  //   iconURL: bot.user.displayAvatarURL()
-  // });
 
   channel.send({ embeds: [embed] });
 }

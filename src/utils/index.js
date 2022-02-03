@@ -18,39 +18,45 @@ export const getGuild = async (bot) => {
   };
 };
 
-export const makerEmbed = (data, bot) => {
-  const embed = new MessageEmbed()
-    .setColor('#00D718')
-    .setFooter({
-      text: `${data.rowNumber} - ${data.date}`
-    })
-    .setAuthor({
-      name: bot.user.username,
-      iconURL: bot.user.displayAvatarURL()
-    })
-    .setImage(data.image || '')
-    .setFields(
-      {
-        name: 'Operador',
-        value: data.operador
-      },
-      {
-        name: 'Atendimento(à)ao',
-        value: data.serviceTo,
-        inline: true
-      },
-      {
-        name: 'ID Aluno',
-        value: data.studentId,
-        inline: true
-      },
-      {
-        name: 'Descrição do atendimento:',
-        value: data.description
-      }
-    );
+export const makerEmbed = (data) => {
+  const embeds = [];
 
-  return { content: `Time responsável <@&${data.team}>`, embeds: [embed] };
+  embeds.push(
+    new MessageEmbed()
+      .setColor('#00D718')
+      .setFooter({
+        text: `${data.rowNumber} - ${data.date}`
+      })
+      .setImage(data.images[0] || '')
+      .setFields(
+        {
+          name: 'Operador',
+          value: data.operador
+        },
+        {
+          name: 'Atendimento(à)ao',
+          value: data.serviceTo,
+          inline: true
+        },
+        {
+          name: 'ID Aluno',
+          value: data.studentId,
+          inline: true
+        },
+        {
+          name: 'Descrição do atendimento:',
+          value: data.description
+        }
+      )
+  );
+
+  if (data.images.length > 1) {
+    embeds.push(
+      new MessageEmbed().setImage(data.images[1] || '').setColor('#00D718')
+    );
+  }
+
+  return { content: `Time responsável <@&${data.team}>`, embeds };
 };
 
 export const checkDate = (data, roles) => {
@@ -64,6 +70,8 @@ export const checkDate = (data, roles) => {
   const image = data[head[5]];
   const team = data[head[6]];
   const msgId = data[head[7]];
+
+  const imgs = image ? image.split(' ').filter((img) => img) : '';
 
   const mentionTeam = roles.find((role) => role.name === team);
 
@@ -87,13 +95,13 @@ export const checkDate = (data, roles) => {
     serviceTo,
     studentId,
     description,
-    image,
+    images: imgs,
     team: mentionTeam.id,
     msgId
   };
 };
 
-export const msgToObj = (msg, roles) => {
+export const msgToArray = (msg, roles) => {
   const embed = msg.embeds[0];
 
   const date = embed.footer.text.split(' ')[2];
@@ -105,6 +113,20 @@ export const msgToObj = (msg, roles) => {
   const teamId = msg.content.replace(/[^0-9]/g, '');
 
   const team = roles.find((role) => role.id === teamId);
+
+  if (msg.embeds.length > 1) {
+    const images = image + msg.embeds[1].image?.url;
+
+    return [
+      date,
+      operador,
+      serviceTo,
+      studentId,
+      description,
+      images,
+      team.name
+    ];
+  }
 
   return [date, operador, serviceTo, studentId, description, image, team.name];
 };

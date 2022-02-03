@@ -6,7 +6,7 @@ export default async function (bot, lastRow) {
   const message = checkDate(lastRow, roles);
 
   if (!message) return;
-  const embed = makerEmbed(message, bot);
+  const embed = makerEmbed(message);
 
   return channel.send(embed).then((msg) => msg.id);
 }
