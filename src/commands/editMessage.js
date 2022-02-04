@@ -14,7 +14,9 @@ export default async function (bot, idMsg, data) {
   const arrMsg = msgToArray(lastMsg, roles);
   const arrRow = data._rawData;
   arrRow.splice(-1, 1);
-  arrRow[5] = arrRow[5].replace(/\s+/g, '');
+
+  arrRow[5] = arrRow[5].replace(/\s+/g, '_');
+  arrMsg[5] = arrMsg[5].replace(',', '_');
 
   const compareArrays = (a, b) => {
     return a.length === b.length && a.every((val, i) => val === b[i]);

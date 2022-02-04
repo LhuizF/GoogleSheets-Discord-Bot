@@ -51,9 +51,10 @@ export const makerEmbed = (data) => {
   );
 
   if (data.images.length > 1) {
-    embeds.push(
-      new MessageEmbed().setImage(data.images[1] || '').setColor('#00D718')
-    );
+    data.images.map((img, i) => {
+      if (i === 0) return;
+      embeds.push(new MessageEmbed().setImage(img || '').setColor('#00D718'));
+    });
   }
 
   return { content: `Time responsável <@&${data.team}>`, embeds };
@@ -115,7 +116,13 @@ export const msgToArray = (msg, roles) => {
   const team = roles.find((role) => role.id === teamId);
 
   if (msg.embeds.length > 1) {
-    const images = image + msg.embeds[1].image?.url;
+    const images = msg.embeds
+      .map((item) => {
+        return item.image?.url;
+      })
+      .toString()
+      .replace(',', '_');
+    //muito estranho replace só esta trocando a primeira virgula
 
     return [
       date,

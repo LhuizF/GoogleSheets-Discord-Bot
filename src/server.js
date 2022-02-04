@@ -29,11 +29,5 @@ bot.on('ready', () => {
         main(bot, lastTenRow);
       });
     }, 3000);
-
-    // sheet.getRows().then((rows) => {
-    //   const lastTenRow = rows.slice(-10);
-    //   main(bot, lastTenRow);
-    // });
-
   });
 });
