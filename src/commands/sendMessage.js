@@ -8,5 +8,8 @@ export default async function (bot, lastRow) {
   if (!message) return;
   const embed = makerEmbed(message);
 
-  return channel.send(embed).then((msg) => msg.id);
+  return channel
+    .send(embed)
+    .then((msg) => msg.id)
+    .catch((err) => console.log(err));
 }

@@ -6,8 +6,11 @@ export default async function (bot, data) {
     if (!row.msgId) {
       const msgId = await sendMessage(bot, row);
 
-      row.msgId = msgId;
-      row.save();
+      if (msgId) {
+        row.msgId = msgId;
+        row.save();
+      }
+
       return;
     }
 

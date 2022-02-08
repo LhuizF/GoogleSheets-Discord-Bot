@@ -72,7 +72,12 @@ export const checkDate = (data, roles) => {
   const team = data[head[6]];
   const msgId = data[head[7]];
 
-  const imgs = image ? image.split(' ').filter((img) => img) : '';
+  const imgs = image
+    ? image
+        .replace(/\n/g, ' ')
+        .split(' ')
+        .filter((img) => img)
+    : '';
 
   const mentionTeam = roles.find((role) => role.name === team);
 

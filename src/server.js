@@ -7,7 +7,7 @@ import statusMessage from './commands/statusMessage';
 
 const app = express();
 
-app.listen(5000);
+app.listen(process.env.APP_PORT || 5000);
 
 app.get('/', (req, res) => {
   const date = new Date().toLocaleTimeString();
