@@ -1,4 +1,4 @@
-import { getGuild, makerEmbed, msgToArray, checkDate } from '../utils';
+import { getGuild, makerEmbed, msgToArray, checkDate } from '../utils/index.js';
 
 export default async function (bot, idMsg, data) {
   const { channel, roles } = await getGuild(bot);

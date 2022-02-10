@@ -1,4 +1,4 @@
-import { getGuild } from '../utils';
+import { getGuild } from '../utils/index.js';
 import { MessageEmbed } from 'discord.js';
 export default async function (bot) {
   const { guild } = await getGuild(bot);

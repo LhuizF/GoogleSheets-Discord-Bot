@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import express from 'express';
-import main from './app';
-import bot from './config/discord';
-import getDocGoogleSheet from './config/googleSheet';
-import statusMessage from './commands/statusMessage';
+import main from './app.js';
+import bot from './config/discord.js';
+import getDocGoogleSheet from './config/googleSheet.js';
+import statusMessage from './commands/statusMessage.js';
 
 const app = express();
 

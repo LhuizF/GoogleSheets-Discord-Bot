@@ -1,5 +1,5 @@
-import sendMessage from './commands/sendMessage';
-import editMessage from './commands/editMessage';
+import sendMessage from './commands/sendMessage.js';
+import editMessage from './commands/editMessage.js';
 
 export default async function (bot, data) {
   data.map(async (row) => {

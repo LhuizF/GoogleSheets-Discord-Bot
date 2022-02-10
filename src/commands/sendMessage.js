@@ -1,4 +1,4 @@
-import { getGuild, checkDate, makerEmbed } from '../utils';
+import { getGuild, checkDate, makerEmbed } from '../utils/index.js';
 
 export default async function (bot, lastRow) {
   const { channel, roles } = await getGuild(bot);
