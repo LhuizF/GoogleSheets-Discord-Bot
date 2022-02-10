@@ -90,7 +90,6 @@ export const checkDate = (data, roles) => {
     !description ||
     !mentionTeam
   ) {
-    console.log('dados incompletos');
     return false;
   }
 
@@ -117,7 +116,6 @@ export const msgToArray = (msg, roles) => {
   const description = embed.fields[3].value;
   const image = embed.image?.url || '';
   const teamId = msg.content.replace(/[^0-9]/g, '');
-
   const team = roles.find((role) => role.id === teamId);
 
   if (msg.embeds.length > 1) {
@@ -125,9 +123,7 @@ export const msgToArray = (msg, roles) => {
       .map((item) => {
         return item.image?.url;
       })
-      .toString()
-      .replace(',', '_');
-    //muito estranho replace só esta trocando a primeira virgula
+      .toString();
 
     return [
       date,

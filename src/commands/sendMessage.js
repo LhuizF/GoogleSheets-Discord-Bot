@@ -10,6 +10,9 @@ export default async function (bot, lastRow) {
 
   return channel
     .send(embed)
-    .then((msg) => msg.id)
+    .then((msg) => {
+      console.log('Mensagem enviado 📨');
+      return msg.id;
+    })
     .catch((err) => console.log(err));
 }
