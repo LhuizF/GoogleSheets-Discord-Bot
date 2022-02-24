@@ -83,13 +83,13 @@ export const checkDate = (data, roles) => {
 
   const mentionTeam = roles.find((role) => role.name === team);
 
+  if (!date || !team || !operador || !serviceTo || !studentId || !description) {
+    return false;
+  }
+
   if (!mentionTeam) {
     statusMessage('Cargo não encontrado - ❌', '#F84043');
     return;
-  }
-
-  if (!date || !team || !operador || !serviceTo || !studentId || !description) {
-    return false;
   }
 
   return {
