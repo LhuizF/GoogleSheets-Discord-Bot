@@ -7,7 +7,7 @@ import statusMessage from './commands/statusMessage';
 
 const app = express();
 
-app.listen(process.env.APP_PORT || 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Online  ✅ -> ${process.env.APP_PORT}`);
 });
 
