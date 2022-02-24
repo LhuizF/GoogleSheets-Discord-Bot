@@ -1,12 +1,13 @@
-import { getGuild } from '../utils/index.js';
 import { MessageEmbed } from 'discord.js';
-export default async function (bot) {
-  const { guild } = await getGuild(bot);
+import { getGuild } from '../utils';
+
+export default async function (log, color) {
+  const { guild } = await getGuild();
 
   const channel = guild.channels.cache.get(process.env.CHECK_CHANNEL_ID);
   if (!channel) return;
 
-  const embed = new MessageEmbed().setColor('#09D319').setTitle('Online  ✅');
+  const embed = new MessageEmbed().setColor(color).setTitle(log);
 
   channel.send({ embeds: [embed] });
 }

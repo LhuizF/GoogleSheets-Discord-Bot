@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js';
+import bot from '../config/discord';
 
-export const getGuild = async (bot) => {
+export const getGuild = async () => {
   const guild = bot.guilds.cache.get(process.env.GUILD_ID);
 
   if (!guild) return;

@@ -1,7 +1,8 @@
-import { getGuild, makerEmbed, msgToArray, checkDate } from '../utils/index.js';
+import { getGuild, makerEmbed, msgToArray, checkDate } from '../utils';
+import statusMessage from './statusMessage';
 
-export default async function (bot, idMsg, data) {
-  const { channel, roles } = await getGuild(bot);
+export default async function (idMsg, data) {
+  const { channel, roles } = await getGuild();
 
   const lastMsg = await channel.messages
     .fetch(idMsg)
@@ -24,6 +25,12 @@ export default async function (bot, idMsg, data) {
   const isEqual = compareArrays(arrRow, arrMsg);
   if (isEqual) return;
 
-  const embed = makerEmbed(message);
-  lastMsg.edit(embed).then(() => console.log('Mensagem editada 📝'));
+  const msg = makerEmbed(message);
+
+  lastMsg.edit(msg).then(() => {
+    const [{ footer }] = msg.embeds;
+    const [line] = footer.text.split(' ');
+
+    statusMessage(`Mensagem editada - linha ${line} - 📝`, '#F3E415');
+  });
 }

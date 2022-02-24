@@ -1,7 +1,8 @@
-import { getGuild, checkDate, makerEmbed } from '../utils/index.js';
+import { getGuild, checkDate, makerEmbed } from '../utils';
+import statusMessage from './statusMessage';
 
-export default async function (bot, lastRow) {
-  const { channel, roles } = await getGuild(bot);
+export default async function (lastRow) {
+  const { channel, roles } = await getGuild();
 
   const message = checkDate(lastRow, roles);
 
@@ -11,7 +12,10 @@ export default async function (bot, lastRow) {
   return channel
     .send(embed)
     .then((msg) => {
-      console.log('Mensagem enviado 📨');
+      const [{ footer }] = msg.embeds;
+      const [line] = footer.text.split(' ');
+
+      statusMessage(`Mensagem enviada - linha ${line} - 📨`, '#1aa7ec');
       return msg.id;
     })
     .catch((err) => console.log(err));

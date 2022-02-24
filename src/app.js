@@ -1,10 +1,10 @@
-import sendMessage from './commands/sendMessage.js';
-import editMessage from './commands/editMessage.js';
+import sendMessage from './commands/sendMessage';
+import editMessage from './commands/editMessage';
 
 export default async function (bot, data) {
   data.map(async (row) => {
     if (!row.msgId) {
-      const msgId = await sendMessage(bot, row);
+      const msgId = await sendMessage(row);
 
       if (msgId) {
         row.msgId = msgId;
@@ -15,6 +15,6 @@ export default async function (bot, data) {
     }
 
     const idMsg = row.msgId;
-    editMessage(bot, idMsg, row);
+    editMessage(idMsg, row);
   });
 }
