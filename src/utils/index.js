@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js';
+import statusMessage from '../commands/statusMessage';
 import bot from '../config/discord';
 
 export const getGuild = async () => {
@@ -82,15 +83,12 @@ export const checkDate = (data, roles) => {
 
   const mentionTeam = roles.find((role) => role.name === team);
 
-  if (
-    !date ||
-    !team ||
-    !operador ||
-    !serviceTo ||
-    !studentId ||
-    !description ||
-    !mentionTeam
-  ) {
+  if (!mentionTeam) {
+    statusMessage('Cargo não encontrado - ❌', '#F84043');
+    return;
+  }
+
+  if (!date || !team || !operador || !serviceTo || !studentId || !description) {
     return false;
   }
 
