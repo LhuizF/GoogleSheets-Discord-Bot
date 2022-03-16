@@ -8,12 +8,12 @@ import statusMessage from './commands/statusMessage';
 const app = express();
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log(`Online  ✅ -> ${process.env.APP_PORT}`);
+  console.log(`Online  ✅`);
 });
 
 app.get('/', (req, res) => {
   const date = new Date().toLocaleTimeString();
-  statusMessage(`${date} - Online  ✅`, '#09D319');
+  statusMessage(`${date} - Online ✅`, '#09D319');
   return res.json('okay');
 });
 
@@ -31,5 +31,10 @@ bot.on('ready', () => {
         main(bot, lastTenRow);
       });
     }, 4000);
+
+    // sheet.getRows().then((rows) => {
+    //   const lastTenRow = rows.slice(-10);
+    //   main(bot, lastTenRow);
+    // });
   });
 });
