@@ -31,10 +31,5 @@ bot.on('ready', () => {
         main(bot, lastTenRow);
       });
     }, 4000);
-
-    // sheet.getRows().then((rows) => {
-    //   const lastTenRow = rows.slice(-10);
-    //   main(bot, lastTenRow);
-    // });
   });
 });
