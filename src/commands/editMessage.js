@@ -19,6 +19,7 @@ export default async function (idMsg, data) {
   arrRow[3] = arrRow[3] || '-';
   arrRow[4] = arrRow[4].replace(/ /g, '');
   arrRow[5] = arrRow[5].replace(/\s+/g, ',');
+  arrRow.length = 6;
 
   const compareArrays = (a, b) => {
     return a.length === b.length && a.every((val, i) => val === b[i]);
