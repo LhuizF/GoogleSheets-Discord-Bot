@@ -16,6 +16,7 @@ export default async function (idMsg, data) {
   const arrRow = data._rawData;
   arrRow.splice(-1, 1);
 
+  arrRow[3] = arrRow[3] || '-';
   arrRow[5] = arrRow[5].replace(/\s+/g, ',');
 
   const compareArrays = (a, b) => {
@@ -23,6 +24,7 @@ export default async function (idMsg, data) {
   };
 
   const isEqual = compareArrays(arrRow, arrMsg);
+
   if (isEqual) return;
 
   const msg = makerEmbed(message);

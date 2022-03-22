@@ -6,7 +6,7 @@ const checkDate = (data, roles) => {
   const date = data[head[0]];
   const operador = data[head[1]];
   const serviceTo = data[head[2]];
-  const studentId = data[head[3]];
+  const studentId = data[head[3]] || '-';
   const description = data[head[4]];
   const image = data[head[5]];
   const team = data[head[6]];
@@ -19,7 +19,7 @@ const checkDate = (data, roles) => {
         .filter((img) => img)
     : '';
 
-  if (!date || !team || !operador || !serviceTo || !studentId || !description) {
+  if (!date || !team || !operador || !serviceTo || !description) {
     statusMessage(`Dados incompletos - 🎲`, '#F35B15');
     return false;
   }
