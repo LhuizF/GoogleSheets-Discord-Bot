@@ -26,7 +26,8 @@ export default async function (idMsg, data) {
 
   const isEqual = compareArrays(arrRow, arrMsg);
   if (isEqual) return;
-
+  console.log(arrRow);
+  console.log(arrMsg);
   const msg = makerEmbed(message);
 
   lastMsg.edit(msg).then(() => {
