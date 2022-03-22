@@ -20,6 +20,7 @@ const msgToArray = (msg, roles) => {
   });
 
   const strTeam = team.reverse().toString().replace(',', '/');
+  const contentMsg = description.replace(/ /g, '');
 
   if (msg.embeds.length > 1) {
     const images = msg.embeds
@@ -28,10 +29,10 @@ const msgToArray = (msg, roles) => {
       })
       .toString();
 
-    return [date, operador, serviceTo, studentId, description, images, strTeam];
+    return [date, operador, serviceTo, studentId, contentMsg, images, strTeam];
   }
 
-  return [date, operador, serviceTo, studentId, description, image, strTeam];
+  return [date, operador, serviceTo, studentId, contentMsg, image, strTeam];
 };
 
 export default msgToArray;
