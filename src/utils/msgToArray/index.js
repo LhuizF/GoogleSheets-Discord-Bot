@@ -19,7 +19,7 @@ const msgToArray = (msg, roles) => {
     }
   });
 
-  const strTeam = team.reverse().toString().replace(',', '/');
+  const strTeam = team.toString().replace(',', '/');
   const contentMsg = description.replace(/ /g, '');
 
   if (msg.embeds.length > 1) {
