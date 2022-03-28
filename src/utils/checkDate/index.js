@@ -20,10 +20,10 @@ const checkDate = (data, roles) => {
     : '';
 
   if (!date || !team || !operador || !serviceTo || !description) {
-    statusMessage(
-      `Dados incompletos - linha ${data.rowNumber.toString()} - 🎲`,
-      '#F35B15'
-    );
+    // statusMessage(
+    //   `Dados incompletos - linha ${data.rowNumber.toString()} - 🎲`,
+    //   '#F35B15'
+    // );
     return false;
   }
 
