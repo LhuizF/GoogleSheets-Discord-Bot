@@ -4,7 +4,7 @@ import main from './app';
 import bot from './config/discord';
 import getDocGoogleSheet from './config/googleSheet';
 import statusMessage from './commands/statusMessage';
-
+import routes from './routes';
 const app = express();
 
 app.listen(process.env.PORT || 5000, () => {
@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
   statusMessage(`${date} - Online ✅`, '#09D319');
   return res.json('okay');
 });
+
+app.use(express.json());
+app.use(routes);
 
 bot.on('ready', () => {
   if (!bot.user) return;
