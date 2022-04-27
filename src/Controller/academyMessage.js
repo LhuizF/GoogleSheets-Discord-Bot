@@ -4,7 +4,6 @@ import statusMessage from '../commands/statusMessage';
 
 class AcademyController {
   async send(req, res) {
-    console.log(req.body);
     const { academy, roles } = await getGuild();
     const roleAcademy = roles.find((role) => role.name === 'Produtos');
 

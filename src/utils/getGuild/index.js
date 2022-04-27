@@ -9,6 +9,8 @@ const getGuild = async () => {
 
   const academy = guild.channels.cache.get(process.env.ACADEMY_CHANNEL_ID);
 
+  const doubts = guild.channels.cache.get(process.env.DOUBTS_CHANNEL_ID);
+
   const roles = await guild.roles.fetch().then((role) => role);
 
   if (!channel || !roles) return;
@@ -17,7 +19,8 @@ const getGuild = async () => {
     guild,
     channel,
     roles,
-    academy
+    academy,
+    doubts
   };
 };
 
